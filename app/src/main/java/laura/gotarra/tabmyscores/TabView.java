@@ -17,40 +17,48 @@ import java.util.List;
 
 public class TabView extends View {
 
-    private ArrayList<Integer> chords_frets;
+    //private ArrayList<Integer> chords_frets;
+    private int min = 22;
+    private TabFret F;
 
 
     public TabView(Context context) {
         super(context);
-        chords_frets = new ArrayList<>();
+        //chords_frets = new ArrayList<>();
+        F = new TabFret();
     }
 
     public TabView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
-        this.chords_frets = chords_frets;
+        //this.chords_frets = chords_frets;
+        F = new TabFret();
     }
 
     public TabView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+        F = new TabFret();
     }
 
-    public void AddChord(ArrayList<Integer> chords_frets){
+    /*public void AddChord(ArrayList<Integer> chords_frets){
         this.chords_frets = chords_frets;
-    }
-
-    @Override
-    protected void onDraw(Canvas canvas) {
-        super.onDraw(canvas);
-        Integer min = chords_frets.get(0); //last guitar_fret
-        /*for (Integer element : chords_frets){
-            if (element < min ) {
-                min = element;
+    }*/
+    public void calculMin(){
+        for (int i = 0; i < 6; i++){
+            if (F.getFret(i) < min ) {
+                min = F.getFret(i);
             }
         }
         System.out.println(min);
         if ( min == 0 ){
             min = 1;
-        }*/
+        }
+    }
+
+    @Override
+    protected void onDraw(Canvas canvas) {
+        super.onDraw(canvas);
+        //Integer min = chords_frets.get(0); //last guitar_fret
+        calculMin();
 
         Paint lines = new Paint();
         lines.setStyle(Paint.Style.STROKE);
@@ -87,10 +95,10 @@ public class TabView extends View {
             x += canvas.getWidth()/4 - bounds.width()/2;
         }
 
-        for (Integer element : chords_frets){
+        /*for (Integer element : chords_frets){
 
 
-        }
+        }*/
 
     }
 

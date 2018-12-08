@@ -11,25 +11,25 @@ public class TabActivity extends AppCompatActivity {
 
     TabView test;
     Canvas canvas;
-    ArrayList<Integer> frets;
+    //ArrayList<Integer> frets;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tab);
 
-        frets = new ArrayList<Integer>();
+        /*frets = new ArrayList<Integer>();
 
         frets.add(1);
         frets.add(1);
         frets.add(2);
         frets.add(3);
         frets.add(3);
-        frets.add(1);
+        frets.add(1);*/
 
         //test = findViewById(R.id.tabView);
         test = new TabView(this);
-        test.AddChord(frets);
+        //test.AddChord(frets);
 
     }
 
