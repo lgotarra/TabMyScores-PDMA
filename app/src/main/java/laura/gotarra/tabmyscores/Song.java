@@ -8,6 +8,13 @@ public class Song {
     private List<Tab> tab;
     private List<String> tags;
 
+    public Song(String name, String artist, List<Tab> tab, List<String> tags) {
+        this.name = name;
+        this.artist = artist;
+        this.tab = tab;
+        this.tags = tags;
+    }
+
     public String getName() {
         return name;
     }
@@ -40,10 +47,5 @@ public class Song {
         this.tags = tags;
     }
 
-    public Song(String name, String artist, List<Tab> tab, List<String> tags) {
-        this.name = name;
-        this.artist = artist;
-        this.tab = tab;
-        this.tags = tags;
-    }
+
 }

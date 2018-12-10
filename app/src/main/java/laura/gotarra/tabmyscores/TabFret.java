@@ -9,13 +9,18 @@ public class TabFret {
     public TabFret(){
         frets = new ArrayList<>();
 
-        frets.add(2);
+        /*frets.add(2);
         frets.add(4);
         frets.add(4);
         frets.add(4);
         frets.add(2);
-        frets.add(2);
+        frets.add(2);*/
     }
+
+    public void setChord(int i){
+        frets.add(i);
+    }
+
     public int getFret(int i){
         return frets.get(i);
     }

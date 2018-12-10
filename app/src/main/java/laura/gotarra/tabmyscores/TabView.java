@@ -17,48 +17,42 @@ import java.util.List;
 
 public class TabView extends View {
 
-    //private ArrayList<Integer> chords_frets;
-    private int min = 22;
-    private TabFret F;
 
+    private ArrayList<Integer> chords_frets;
+    private Integer min;
 
     public TabView(Context context) {
         super(context);
-        //chords_frets = new ArrayList<>();
-        F = new TabFret();
     }
 
-    public TabView(Context context, @Nullable AttributeSet attrs) {
-        super(context, attrs);
-        //this.chords_frets = chords_frets;
-        F = new TabFret();
-    }
-
-    public TabView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
-        super(context, attrs, defStyleAttr);
-        F = new TabFret();
-    }
-
-    /*public void AddChord(ArrayList<Integer> chords_frets){
+    public void setChords_frets(ArrayList<Integer> chords_frets) {
         this.chords_frets = chords_frets;
-    }*/
+        init();
+        invalidate();
+    }
+
+    void init() {
+        min = chords_frets.get(0);
+        calculMin();
+    }
+
     public void calculMin(){
-        for (int i = 0; i < 6; i++){
-            if (F.getFret(i) < min ) {
-                min = F.getFret(i);
+        if( !chords_frets.isEmpty())
+        {
+            for (Integer element : chords_frets){
+                if (element < min ) {
+                    min = element;
+                }
             }
-        }
-        System.out.println(min);
-        if ( min == 0 ){
-            min = 1;
+            if ( min == 0 ){
+                min = 1;
+            }
         }
     }
 
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        //Integer min = chords_frets.get(0); //last guitar_fret
-        calculMin();
 
         Paint lines = new Paint();
         lines.setStyle(Paint.Style.STROKE);
@@ -71,8 +65,13 @@ public class TabView extends View {
         text.setColor(Color.BLACK);
         text.setTextSize(35);
 
+        Paint circle = new Paint();
+        circle.setStyle(Paint.Style.FILL);
+        circle.setColor(Color.RED);
+
         float y = 30;
         float x = 1;
+        float x_dist = (canvas.getWidth()-lines.getStrokeWidth()*10)/4;
 
         for (int i = 0; i < 6; i++) {
             canvas.drawLine(0, y, canvas.getWidth(), y, lines);
@@ -82,7 +81,7 @@ public class TabView extends View {
         for (int i = 0; i<4; i++) {
             canvas.drawLine(x,30,x,y-40,lines);
             //canvas.drawRect(x,30,x+10,y-40,lines);
-            x+=(canvas.getWidth()-lines.getStrokeWidth()*10)/4;
+            x+= x_dist;
         }
 
 
@@ -95,10 +94,13 @@ public class TabView extends View {
             x += canvas.getWidth()/4 - bounds.width()/2;
         }
 
-        /*for (Integer element : chords_frets){
-
-
-        }*/
+        y = 30;
+        for (int i = 0; i < 6; i++){
+            if (chords_frets.get(i) > 0) {
+                canvas.drawCircle((chords_frets.get(i)-min)*x_dist +x_dist/2,y,9, circle);
+            }
+            y+=40;
+        }
 
     }
 
