@@ -25,6 +25,10 @@ public class TabView extends View {
         super(context);
     }
 
+    public TabView(Context context, @Nullable AttributeSet attrs) {
+        super(context, attrs);
+    }
+
     public void setChords_frets(ArrayList<Integer> chords_frets) {
         this.chords_frets = chords_frets;
         init();
@@ -97,7 +101,7 @@ public class TabView extends View {
         y = 30;
         for (int i = 0; i < 6; i++){
             if (chords_frets.get(i) > 0) {
-                canvas.drawCircle((chords_frets.get(i)-min)*x_dist +x_dist/2,y,9, circle);
+                canvas.drawCircle((chords_frets.get(i)-min)*x_dist +x_dist/2,y,15, circle);
             }
             y+=40;
         }
