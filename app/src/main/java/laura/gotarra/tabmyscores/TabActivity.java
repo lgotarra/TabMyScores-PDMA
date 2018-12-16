@@ -17,6 +17,9 @@ public class TabActivity extends AppCompatActivity {
 
     TabView test;
     private ArrayList<TabItem> frets_list;
+    private Tab tab;
+    private Song song;
+    private TextView titleSongView, artistView, tagView, textSongView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,11 +48,35 @@ public class TabActivity extends AppCompatActivity {
         frets_list.add(item1);
         frets_list.add(item2);
 
+        ArrayList<String> tabs = new ArrayList<>();
+        tabs.add("Sol");
+        tabs.add("Fa");
+        ArrayList<Tab> tabla = new ArrayList<>();
+        tab = new Tab("Con diez cañones por banda,", tabs);
+        tabla.add(tab);
+        ArrayList<String> tags = new ArrayList<>();
+        tags.add("Metal");
+        song = new Song("La Canción Del Pirata", "Tierra Santa", tabla, tags);
+
+        titleSongView = findViewById(R.id.titleSongView);
+        artistView = findViewById(R.id.artistView);
+        tagView = findViewById(R.id.tagView);
+        textSongView = findViewById(R.id.textSongView);
+
+        imprimirDades();
+    }
+
+    private void imprimirDades(){
+        // S'haura de retocar per fer-ho bé
+        
+        titleSongView.setText(song.getName());
+        artistView.setText(song.getArtist());
+        textSongView.setText(song.getTab().get(0).getPhrase());
+        tagView.setText(song.getTags().get(0));
+
         RecyclerView TabList = findViewById(R.id.tabRecycler);
         TabList.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
         TabList.setAdapter(new TabAdapter());
-
-
     }
 
     class TabViewHolder extends RecyclerView.ViewHolder {
