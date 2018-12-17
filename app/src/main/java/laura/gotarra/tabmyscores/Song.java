@@ -3,15 +3,18 @@ package laura.gotarra.tabmyscores;
 import java.util.List;
 
 public class Song {
+
     private String name;
     private String artist;
-    private List<Tab> tab;
+    private List<String> frases;
+    private List<Chord> chords;
     private List<String> tags;
 
-    public Song(String name, String artist, List<Tab> tab, List<String> tags) {
+    public Song(String name, String artist, List<String> frases, List<Chord> chords, List<String> tags) {
         this.name = name;
         this.artist = artist;
-        this.tab = tab;
+        this.frases = frases;
+        this.chords = chords;
         this.tags = tags;
     }
 
@@ -31,20 +34,28 @@ public class Song {
         this.artist = artist;
     }
 
-    public List<Tab> getTab() {
-        return tab;
-    }
-
-    public void setTab(List<Tab> tab) {
-        this.tab = tab;
-    }
-
     public List<String> getTags() {
         return tags;
     }
 
     public void setTags(List<String> tags) {
         this.tags = tags;
+    }
+
+    public List<String> getFrases() {
+        return frases;
+    }
+
+    public void setFrases(List<String> frases) {
+        this.frases = frases;
+    }
+
+    public List<Chord> getChords() {
+        return chords;
+    }
+
+    public void setChords(List<Chord> chords) {
+        this.chords = chords;
     }
 
 

@@ -12,14 +12,18 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
 public class TabActivity extends AppCompatActivity {
 
-    TabView test;
-    private ArrayList<TabItem> frets_list;
-    private Tab tab;
     private Song song;
     private TextView titleSongView, artistView, tagView, textSongView;
+    private Map<String, ArrayList<Integer>> chord_map;
+    private LinearLayoutManager layout;
+    private RecyclerView tabList;
+    private static int firstVisibleInListview;
+    private TabAdapter tabListAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,12 +32,11 @@ public class TabActivity extends AppCompatActivity {
 
         ArrayList<Integer> frets = new ArrayList<Integer>();
         frets.add(3);
+        frets.add(0);
+        frets.add(0);
+        frets.add(0);
+        frets.add(2);
         frets.add(3);
-        frets.add(4);
-        frets.add(5);
-        frets.add(5);
-        frets.add(3);
-        TabItem item1 = new TabItem("Sol",frets);
 
         ArrayList<Integer> frets_1 = new ArrayList<Integer>();
         frets_1.add(1);
@@ -42,21 +45,35 @@ public class TabActivity extends AppCompatActivity {
         frets_1.add(3);
         frets_1.add(3);
         frets_1.add(1);
-        TabItem item2 = new TabItem("Fa", frets_1);
 
-        frets_list = new ArrayList<>();
-        frets_list.add(item1);
-        frets_list.add(item2);
+        ArrayList<Integer> frets_2 = new ArrayList<>();
+        frets_2.add(2);
+        frets_2.add(4);
+        frets_2.add(4);
+        frets_2.add(4);
+        frets_2.add(2);
+        frets_2.add(2);
 
-        ArrayList<String> tabs = new ArrayList<>();
-        tabs.add("Sol");
-        tabs.add("Fa");
-        ArrayList<Tab> tabla = new ArrayList<>();
-        tab = new Tab("Con diez cañones por banda,", tabs);
-        tabla.add(tab);
+        chord_map = new TreeMap<>();
+        chord_map.put("Sol",frets);
+        chord_map.put("Fa",frets_1);
+        chord_map.put("Si",frets_2);
+
+        ArrayList<Chord> chords = new ArrayList<>();
+        chords.add(new Chord("Sol",0));
+        chords.add(new Chord("Fa",0));
+        chords.add(new Chord("Si",1));
+        chords.add(new Chord("Sol",1));
+        chords.add(new Chord("Fa",1));
+
+        ArrayList<String> frases = new ArrayList<>();
+        frases.add("Con diez cañones por banda,");
+        frases.add("viento en popa a toda vela");
+
+
         ArrayList<String> tags = new ArrayList<>();
         tags.add("Metal");
-        song = new Song("La Canción Del Pirata", "Tierra Santa", tabla, tags);
+        song = new Song("La Canción Del Pirata", "Tierra Santa", frases, chords, tags);
 
         titleSongView = findViewById(R.id.titleSongView);
         artistView = findViewById(R.id.artistView);
@@ -67,26 +84,37 @@ public class TabActivity extends AppCompatActivity {
     }
 
     private void imprimirDades(){
-        // S'haura de retocar per fer-ho bé
         
         titleSongView.setText(song.getName());
         artistView.setText(song.getArtist());
-        textSongView.setText(song.getTab().get(0).getPhrase());
-        tagView.setText(song.getTags().get(0));
+        textSongView.setText(song.getFrases().get(0));
 
-        RecyclerView TabList = findViewById(R.id.tabRecycler);
-        TabList.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
-        TabList.setAdapter(new TabAdapter());
+        String text = "";
+        for (String element : song.getTags()){
+            text+= element + " ";
+        }
+        tagView.setText(text);
+
+        tabList = findViewById(R.id.tabRecycler);
+        layout = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
+        tabList.setLayoutManager(layout);
+        tabListAdapter = new TabAdapter();
+        tabList.setAdapter(tabListAdapter);
+        tabList.setOnScrollListener(recyclerViewOnScrollListener);
+
+        firstVisibleInListview = layout.findFirstVisibleItemPosition();
     }
 
     class TabViewHolder extends RecyclerView.ViewHolder {
         private TabView tabView;
         private TextView textView;
 
+
         public TabViewHolder (View itemView) {
             super(itemView);
             this.tabView = itemView.findViewById(R.id.tabView);
             this.textView = itemView.findViewById(R.id.textView);
+
         }
     }
 
@@ -101,15 +129,45 @@ public class TabActivity extends AppCompatActivity {
 
         @Override
         public void onBindViewHolder(@NonNull TabViewHolder holder, int position) {
-            TabItem item  = frets_list.get(position);
-            holder.tabView.setChords_frets(item.getChord_frets());
-            holder.textView.setText(item.getChord_name());
+            Chord item  = song.getChords().get(position);
+            holder.tabView.setChords_frets(chord_map.get(item.getName()));
+            holder.textView.setText(item.getName());
+
         }
 
-        public int getItemCount() { return frets_list.size(); }
+        public int getItemCount() { return song.getChords().size(); }
+
+        public String getItemText(int position) {
+            Chord item  = song.getChords().get(position);
+            int pos = item.getFrase();
+            return song.getFrases().get(pos);
+        }
+
 
 
     }
+
+    public RecyclerView.OnScrollListener recyclerViewOnScrollListener = new RecyclerView.OnScrollListener(){
+
+        @Override
+        public void onScrolled(RecyclerView tabList, int dx, int dy)
+        {
+            super.onScrolled(tabList, dx, dy);
+
+            int currentFirstVisible = layout.findFirstVisibleItemPosition();
+
+            if(currentFirstVisible != firstVisibleInListview ) {
+
+                String text = tabListAdapter.getItemText(currentFirstVisible);
+                textSongView.setText(text);
+
+            }
+
+            firstVisibleInListview = currentFirstVisible;
+
+        }
+
+    };
 
 
 }
