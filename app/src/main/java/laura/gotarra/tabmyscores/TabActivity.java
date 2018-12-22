@@ -1,5 +1,6 @@
 package laura.gotarra.tabmyscores;
 
+import android.content.Intent;
 import android.graphics.Canvas;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -24,40 +25,16 @@ public class TabActivity extends AppCompatActivity {
     private RecyclerView tabList;
     private static int firstVisibleInListview;
     private TabAdapter tabListAdapter;
+    private static final int EDIT_TAB = 0;
+    private Diccionari diccionari;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tab);
 
-        ArrayList<Integer> frets = new ArrayList<Integer>();
-        frets.add(3);
-        frets.add(0);
-        frets.add(0);
-        frets.add(0);
-        frets.add(2);
-        frets.add(3);
-
-        ArrayList<Integer> frets_1 = new ArrayList<Integer>();
-        frets_1.add(1);
-        frets_1.add(1);
-        frets_1.add(2);
-        frets_1.add(3);
-        frets_1.add(3);
-        frets_1.add(1);
-
-        ArrayList<Integer> frets_2 = new ArrayList<>();
-        frets_2.add(2);
-        frets_2.add(4);
-        frets_2.add(4);
-        frets_2.add(4);
-        frets_2.add(2);
-        frets_2.add(2);
-
-        chord_map = new TreeMap<>();
-        chord_map.put("Sol",frets);
-        chord_map.put("Fa",frets_1);
-        chord_map.put("Si",frets_2);
+        diccionari = new Diccionari();
+        chord_map = diccionari.getChords();
 
         ArrayList<Chord> chords = new ArrayList<>();
         chords.add(new Chord("Sol",0));
@@ -168,6 +145,10 @@ public class TabActivity extends AppCompatActivity {
         }
 
     };
+    public void editTab(View view) {
+        Intent intent = new Intent(this, EditTabActivity.class);
+        startActivityForResult(intent, EDIT_TAB);
+    }
 
 
 }
