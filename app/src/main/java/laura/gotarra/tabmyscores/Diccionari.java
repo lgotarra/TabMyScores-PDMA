@@ -8,43 +8,70 @@ public class Diccionari {
     private Map<String, ArrayList<Integer>> chord_map;
 
     public Diccionari(){
-        ArrayList<Integer> frets = new ArrayList<Integer>();
-        frets.add(3);
-        frets.add(0);
-        frets.add(0);
-        frets.add(0);
-        frets.add(2);
-        frets.add(3);
+        ArrayList<Integer> Do = new ArrayList<>();
+        Do.add(0);
+        Do.add(1);
+        Do.add(0);
+        Do.add(2);
+        Do.add(3);
+        Do.add(0);
 
-        ArrayList<Integer> frets_1 = new ArrayList<Integer>();
-        frets_1.add(1);
-        frets_1.add(1);
-        frets_1.add(2);
-        frets_1.add(3);
-        frets_1.add(3);
-        frets_1.add(1);
+        ArrayList<Integer> Re = new ArrayList<Integer>();
+        Re.add(2);
+        Re.add(3);
+        Re.add(2);
+        Re.add(0);
+        Re.add(0);
+        Re.add(0);
 
-        ArrayList<Integer> frets_2 = new ArrayList<>();
-        frets_2.add(2);
-        frets_2.add(4);
-        frets_2.add(4);
-        frets_2.add(4);
-        frets_2.add(2);
-        frets_2.add(2);
+        ArrayList<Integer> Mi = new ArrayList<>();
+        Mi.add(0);
+        Mi.add(0);
+        Mi.add(1);
+        Mi.add(2);
+        Mi.add(2);
+        Mi.add(0);
 
-        ArrayList<Integer> frets_3 = new ArrayList<>();
-        frets_3.add(0);
-        frets_3.add(1);
-        frets_3.add(0);
-        frets_3.add(2);
-        frets_3.add(3);
-        frets_3.add(0);
+        ArrayList<Integer> Fa = new ArrayList<>();
+        Fa.add(1);
+        Fa.add(1);
+        Fa.add(2);
+        Fa.add(3);
+        Fa.add(3);
+        Fa.add(1);
+
+        ArrayList<Integer> Sol = new ArrayList<>();
+        Sol.add(3);
+        Sol.add(0);
+        Sol.add(0);
+        Sol.add(0);
+        Sol.add(2);
+        Sol.add(3);
+
+        ArrayList<Integer> La = new ArrayList<>();
+        La.add(0);
+        La.add(2);
+        La.add(2);
+        La.add(2);
+        La.add(0);
+        La.add(0);
+
+        ArrayList<Integer> Si = new ArrayList<>();
+        Si.add(2);
+        Si.add(4);
+        Si.add(4);
+        Si.add(4);
+        Si.add(2);
+        Si.add(2);
 
         chord_map = new TreeMap<>();
-        chord_map.put("Sol",frets);
-        chord_map.put("Fa",frets_1);
-        chord_map.put("Si",frets_2);
-        chord_map.put("Do", frets_3);
+        chord_map.put("Do",Do);
+        chord_map.put("Re",Re);
+        chord_map.put("Mi",Mi);
+        chord_map.put("Fa", Fa);
+        chord_map.put("Sol", Sol);
+        chord_map.put("La", La);
+        chord_map.put("Si", Si);
     }
     public Map<String, ArrayList<Integer>> getChords(){
         return chord_map;
