@@ -150,5 +150,25 @@ public class TabActivity extends AppCompatActivity {
         startActivityForResult(intent, EDIT_TAB);
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data){
+        switch(requestCode){
+            case EDIT_TAB:
+                if(resultCode == RESULT_OK){
+                    song.setFrase(data.getStringExtra("text"));
+                    ArrayList<String> ch = data.getStringArrayListExtra("CH");
+                    ArrayList<Chord> chos = new ArrayList<>();
+                    for(int i = 0; i < ch.size(); i++){
+                        Chord c = new Chord(ch.get(i), song.getChords().get(song.getChords().size()-1).getFrase() + 1);
+                        chos.add(c);
+                    }
+                    song.afegirChords(chos);
+                    imprimirDades();
+                }
+                break;
+            default:
+                super.onActivityResult(requestCode, resultCode, data);
+        }
+    }
 
 }

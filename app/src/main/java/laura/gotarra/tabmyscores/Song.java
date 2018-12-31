@@ -50,12 +50,20 @@ public class Song {
         this.frases = frases;
     }
 
+    public void setFrase(String frase){
+        frases.add(frase);
+    }
+
     public List<Chord> getChords() {
         return chords;
     }
 
     public void setChords(List<Chord> chords) {
         this.chords = chords;
+    }
+
+    public void afegirChords(List<Chord> chords){
+        this.chords.addAll(chords);
     }
 
 
