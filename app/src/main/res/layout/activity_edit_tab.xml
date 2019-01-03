@@ -27,10 +27,12 @@
         android:layout_marginTop="32dp"
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
+        android:layout_marginBottom="8dp"
         android:ems="10"
         android:inputType="text"
         android:text="Name"
         android:textSize="22dp"
+        app:layout_constraintBottom_toTopOf="@+id/btn_newChord"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/chose_Chord" />
@@ -41,26 +43,11 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
+        android:layout_marginBottom="32dp"
         android:onClick="finish"
-        android:text="Finish"
-        app:layout_constraintBaseline_toBaselineOf="@+id/btn_newPhrase"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <Button
-        android:id="@+id/btn_newPhrase"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginBottom="8dp"
-        android:text="New phrase"
+        android:text="Save"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/btn_finish"
-        app:layout_constraintStart_toEndOf="@+id/btn_newChord"
-        app:layout_constraintTop_toBottomOf="@+id/editText" />
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <Button
         android:id="@+id/btn_newChord"
@@ -70,7 +57,7 @@
         android:layout_marginLeft="16dp"
         android:onClick="addChord"
         android:text="Add chord"
-        app:layout_constraintBaseline_toBaselineOf="@+id/btn_newPhrase"
+        app:layout_constraintBaseline_toBaselineOf="@+id/btn_finish"
         app:layout_constraintStart_toStartOf="parent" />
 
     <laura.gotarra.tabmyscores.TabView

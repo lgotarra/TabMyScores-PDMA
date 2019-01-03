@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">TabMyScores</string>
+    <string name="title_activity_list_song">ListSongActivity</string>
 </resources>

@@ -18,7 +18,7 @@ import java.util.TreeMap;
 
 public class TabActivity extends AppCompatActivity {
 
-    private Song song;
+    private static Song song;
     private TextView titleSongView, artistView, tagView, textSongView;
     private Map<String, ArrayList<Integer>> chord_map;
     private LinearLayoutManager layout;
@@ -36,31 +36,15 @@ public class TabActivity extends AppCompatActivity {
         diccionari = new Diccionari();
         chord_map = diccionari.getChords();
 
-        ArrayList<Chord> chords = new ArrayList<>();
-        chords.add(new Chord("Sol",0));
-        chords.add(new Chord("Fa",0));
-        chords.add(new Chord("Si",1));
-        chords.add(new Chord("Sol",1));
-        chords.add(new Chord("Fa",1));
-
-        ArrayList<String> frases = new ArrayList<>();
-        frases.add("Con diez cañones por banda,");
-        frases.add("viento en popa a toda vela");
-
-
-        ArrayList<String> tags = new ArrayList<>();
-        tags.add("Metal");
-        song = new Song("La Canción Del Pirata", "Tierra Santa", frases, chords, tags);
-
         titleSongView = findViewById(R.id.titleSongView);
         artistView = findViewById(R.id.artistView);
         tagView = findViewById(R.id.tagView);
         textSongView = findViewById(R.id.textSongView);
 
-        imprimirDades();
+        imprimirDades(song);
     }
 
-    private void imprimirDades(){
+    private void imprimirDades(Song song){
         
         titleSongView.setText(song.getName());
         artistView.setText(song.getArtist());
@@ -163,12 +147,14 @@ public class TabActivity extends AppCompatActivity {
                         chos.add(c);
                     }
                     song.afegirChords(chos);
-                    imprimirDades();
+                    imprimirDades(song);
                 }
                 break;
             default:
                 super.onActivityResult(requestCode, resultCode, data);
         }
     }
-
+    public static void setSong(Song s){
+        song = s;
+    }
 }
