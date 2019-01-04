@@ -1,10 +1,11 @@
 package laura.gotarra.tabmyscores;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Canvas;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -14,7 +15,6 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.TreeMap;
 
 public class TabActivity extends AppCompatActivity {
 
@@ -27,6 +27,7 @@ public class TabActivity extends AppCompatActivity {
     private TabAdapter tabListAdapter;
     private static final int EDIT_TAB = 0;
     private Diccionari diccionari;
+    private int currentFirstVisible;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +49,7 @@ public class TabActivity extends AppCompatActivity {
         
         titleSongView.setText(song.getName());
         artistView.setText(song.getArtist());
-        textSongView.setText(song.getFrases().get(0));
+        textSongView.setText(song.getPhrases().get(0));
 
         String text = "";
         for (String element : song.getTags()){
@@ -65,6 +66,7 @@ public class TabActivity extends AppCompatActivity {
 
         firstVisibleInListview = layout.findFirstVisibleItemPosition();
     }
+
 
     class TabViewHolder extends RecyclerView.ViewHolder {
         private TabView tabView;
@@ -101,8 +103,9 @@ public class TabActivity extends AppCompatActivity {
         public String getItemText(int position) {
             Chord item  = song.getChords().get(position);
             int pos = item.getFrase();
-            return song.getFrases().get(pos);
+            return song.getPhrases().get(pos);
         }
+
 
 
 
@@ -115,7 +118,7 @@ public class TabActivity extends AppCompatActivity {
         {
             super.onScrolled(tabList, dx, dy);
 
-            int currentFirstVisible = layout.findFirstVisibleItemPosition();
+            currentFirstVisible = layout.findFirstVisibleItemPosition();
 
             if(currentFirstVisible != firstVisibleInListview ) {
 
@@ -129,9 +132,61 @@ public class TabActivity extends AppCompatActivity {
         }
 
     };
-    public void editTab(View view) {
+    public void onClickAdd(View view) {
         Intent intent = new Intent(this, EditTabActivity.class);
+        intent.putExtra("current_item_pos", currentFirstVisible);
         startActivityForResult(intent, EDIT_TAB);
+
+    }
+
+    public void onClickRemove(View view) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage(R.string.dialog_remove_sentence)
+                .setTitle(R.string.dialog_remove_title);
+
+        builder.setPositiveButton(android.R.string.yes,
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        // get current phrase from current position on recyclerview usign chord list
+                        Chord cur_chord = song.getChords().get(currentFirstVisible);
+                        int cur_phrase = cur_chord.getFrase();
+                        removePhrase(cur_phrase);
+
+
+                    }
+                });
+        builder.setNegativeButton(android.R.string.no, null);
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
+
+    }
+
+    private void removePhrase(int cur_phrase) {
+        List<Chord> chords = song.getChords();
+        List<String> phrases = song.getPhrases();
+
+        List<String> new_phrases = new ArrayList<>(phrases.size()-1);;
+        List<Chord> new_chords = new ArrayList<>(chords.size()-1);
+
+        for (int i = 0; i < phrases.size(); i++){
+            if ( i != cur_phrase) {
+                new_phrases.add(phrases.get(i));
+            }
+        }
+
+        for (int i = 0; i < chords.size(); i++){
+            if ( chords.get(i).getFrase() != cur_phrase ){
+                new_chords.add(chords.get(i));
+            }
+        }
+
+        song.setChords(new_chords);
+        song.setPhrases(new_phrases);
+
+        imprimirDades(song);
+
     }
 
     @Override
@@ -139,14 +194,36 @@ public class TabActivity extends AppCompatActivity {
         switch(requestCode){
             case EDIT_TAB:
                 if(resultCode == RESULT_OK){
-                    song.setFrase(data.getStringExtra("text"));
-                    ArrayList<String> ch = data.getStringArrayListExtra("CH");
-                    ArrayList<Chord> chos = new ArrayList<>();
-                    for(int i = 0; i < ch.size(); i++){
-                        Chord c = new Chord(ch.get(i), song.getChords().get(song.getChords().size()-1).getFrase() + 1);
-                        chos.add(c);
+                    String phrase = data.getStringExtra("text");
+                    List<String> ch = data.getStringArrayListExtra("CH");
+                    // we save the las current_item_pos on the layout by passing it on intents
+                    int cur_pos = data.getIntExtra("current_item_pos",0);
+                    List<Chord> new_chords = new ArrayList<>();
+                    List<Chord> chords = song.getChords();
+
+                    //using the cur_pos, we find which is the last chord of the cur phrase
+                    int cur_phrase = song.getChords().get(cur_pos).getFrase();
+                    int last_chord = cur_pos;
+                    for (int i = cur_pos+1; i < song.getChords().size(); i++){
+                        if (cur_phrase != song.getChords().get(i).getFrase()){
+                            break;
+                        }
+                        last_chord++;
                     }
-                    song.afegirChords(chos);
+                    for (String element : ch){
+                        Chord aux = new Chord(element, song.getPhrases().size());
+                        new_chords.add(aux);
+                    }
+                    if (last_chord == song.getChords().size()-1){
+                        chords.addAll(new_chords);
+                    }
+                    else{
+                        chords.addAll(last_chord+1,new_chords);
+                    }
+                    //chords are added after the current phrase
+
+                    song.addPhrase(phrase);
+                    song.setChords(chords);
                     imprimirDades(song);
                 }
                 break;

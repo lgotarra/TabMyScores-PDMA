@@ -6,14 +6,14 @@ public class Song {
 
     private String name;
     private String artist;
-    private List<String> frases;
+    private List<String> phrases;
     private List<Chord> chords;
     private List<String> tags;
 
-    public Song(String name, String artist, List<String> frases, List<Chord> chords, List<String> tags) {
+    public Song(String name, String artist, List<String> phrases, List<Chord> chords, List<String> tags) {
         this.name = name;
         this.artist = artist;
-        this.frases = frases;
+        this.phrases = phrases;
         this.chords = chords;
         this.tags = tags;
     }
@@ -42,16 +42,16 @@ public class Song {
         this.tags = tags;
     }
 
-    public List<String> getFrases() {
-        return frases;
+    public List<String> getPhrases() {
+        return phrases;
     }
 
-    public void setFrases(List<String> frases) {
-        this.frases = frases;
+    public void setPhrases(List<String> phrases) {
+        this.phrases = phrases;
     }
 
     public void setFrase(String frase){
-        frases.add(frase);
+        phrases.add(frase);
     }
 
     public List<Chord> getChords() {
@@ -62,8 +62,8 @@ public class Song {
         this.chords = chords;
     }
 
-    public void afegirChords(List<Chord> chords){
-        this.chords.addAll(chords);
+    public void addPhrase(String phrase){
+        this.phrases.add(phrase);
     }
 
 
