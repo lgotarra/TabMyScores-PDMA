@@ -24,6 +24,7 @@ public class EditTabActivity extends AppCompatActivity {
     private Object[] chords; // = {"Do", "Re", "Mi", "Fa", "Sol", "La", "Si"};
     private String frase, chord_actual;
     private ArrayList<String> chord;
+    private String tittle, artist, tags;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +40,11 @@ public class EditTabActivity extends AppCompatActivity {
 
         tabView2 = findViewById(R.id.tabView2);
         tabView2.setChords_frets(diccionari.getChords().get("Do"));
+
+        Intent intent = getIntent();
+        tittle = intent.getStringExtra("tittle");
+        artist = intent.getStringExtra("artist");
+        tags = intent.getStringExtra("tags");
 
         chose_Chord.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -61,6 +67,9 @@ public class EditTabActivity extends AppCompatActivity {
         Intent data = new Intent();
         data.putExtra("text", frase);
         data.putExtra("CH", chord);
+        data.putExtra("tittle", tittle);
+        data.putExtra("artist", artist);
+        data.putExtra("tags", tags);
         setResult(RESULT_OK, data);
         finish();
     }

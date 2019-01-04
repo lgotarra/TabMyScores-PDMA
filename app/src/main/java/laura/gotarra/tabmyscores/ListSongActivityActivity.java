@@ -8,14 +8,16 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
+import java.util.AbstractQueue;
 import java.util.ArrayList;
 import java.util.List;
 
 public class ListSongActivityActivity extends AppCompatActivity {
 
-    private List<Song> songs;
+    private static List<Song> songs;
     private RecyclerView songsView;
     private Adapter adapter;
 
@@ -128,5 +130,14 @@ public class ListSongActivityActivity extends AppCompatActivity {
         public int getItemCount(){
             return songs.size();
         }
+    }
+
+    public void newSong(View view) {
+        Intent intent = new Intent(this, NewSongActivity.class);
+        startActivityForResult(intent, 3);
+    }
+
+    public static void setSong(Song song){
+        songs.add(song);
     }
 }
