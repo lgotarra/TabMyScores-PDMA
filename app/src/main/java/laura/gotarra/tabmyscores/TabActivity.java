@@ -42,10 +42,10 @@ public class TabActivity extends AppCompatActivity {
         tagView = findViewById(R.id.tagView);
         textSongView = findViewById(R.id.textSongView);
 
-        imprimirDades(song);
+        printData(song);
     }
 
-    private void imprimirDades(Song song){
+    private void printData(Song song){
         
         titleSongView.setText(song.getName());
         artistView.setText(song.getArtist());
@@ -66,7 +66,6 @@ public class TabActivity extends AppCompatActivity {
 
         firstVisibleInListview = layout.findFirstVisibleItemPosition();
     }
-
 
     class TabViewHolder extends RecyclerView.ViewHolder {
         private TabView tabView;
@@ -132,10 +131,10 @@ public class TabActivity extends AppCompatActivity {
         }
 
     };
-    public void onClickAdd(View view) {
-        Intent intent = new Intent(this, EditTabActivity.class);
-        intent.putExtra("current_item_pos", currentFirstVisible);
-        startActivityForResult(intent, EDIT_TAB);
+    public void onClickAddPhrase(View view) {
+        Intent intent_add_phrase = new Intent(this, EditTabActivity.class);
+        intent_add_phrase.putExtra("current_item_pos", currentFirstVisible);
+        startActivityForResult(intent_add_phrase, EDIT_TAB);
 
     }
 
@@ -201,7 +200,7 @@ public class TabActivity extends AppCompatActivity {
         song.setChords(new_chords);
         song.setPhrases(new_phrases);
 
-        imprimirDades(song);
+        printData(song);
 
     }
 
@@ -243,13 +242,14 @@ public class TabActivity extends AppCompatActivity {
 
                     song.addPhrase(phrase);
                     song.setChords(chords);
-                    imprimirDades(song);
+                    printData(song);
                 }
                 break;
             default:
                 super.onActivityResult(requestCode, resultCode, data);
         }
     }
+
     public static void setSong(Song s){
         song = s;
     }
