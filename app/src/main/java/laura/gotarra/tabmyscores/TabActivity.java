@@ -164,6 +164,7 @@ public class TabActivity extends AppCompatActivity {
     }
 
     private void removePhrase(int cur_phrase) {
+        //TODO que no es pugui borrar la frase si només queda una
         List<Chord> chords = song.getChords();
         List<String> phrases = song.getPhrases();
 
@@ -193,6 +194,7 @@ public class TabActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data){
         switch(requestCode){
             case EDIT_TAB:
+                //TODO permetre borrar la primera frase (ara no deixa)
                 if(resultCode == RESULT_OK){
                     String phrase = data.getStringExtra("text");
                     List<String> ch = data.getStringArrayListExtra("CH");
@@ -204,12 +206,15 @@ public class TabActivity extends AppCompatActivity {
                     //using the cur_pos, we find which is the last chord of the cur phrase
                     int cur_phrase = song.getChords().get(cur_pos).getFrase();
                     int last_chord = cur_pos;
-                    for (int i = cur_pos+1; i < song.getChords().size(); i++){
-                        if (cur_phrase != song.getChords().get(i).getFrase()){
-                            break;
+                    if (song.getChords().size() > 1) {
+                        for (int i = cur_pos + 1; i < song.getChords().size(); i++) {
+                            if (cur_phrase != song.getChords().get(i).getFrase()) {
+                                break;
+                            }
+                            last_chord++;
                         }
-                        last_chord++;
                     }
+
                     for (String element : ch){
                         Chord aux = new Chord(element, song.getPhrases().size());
                         new_chords.add(aux);
