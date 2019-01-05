@@ -140,36 +140,48 @@ public class TabActivity extends AppCompatActivity {
     }
 
     public void onClickRemove(View view) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setMessage(R.string.dialog_remove_sentence)
-                .setTitle(R.string.dialog_remove_title);
+        if ( song.getPhrases().size() > 1 ) {
 
-        builder.setPositiveButton(android.R.string.yes,
-                new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        // get current phrase from current position on recyclerview usign chord list
-                        Chord cur_chord = song.getChords().get(currentFirstVisible);
-                        int cur_phrase = cur_chord.getFrase();
-                        removePhrase(cur_phrase);
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setMessage(R.string.dialog_remove_sentence)
+                    .setTitle(R.string.dialog_remove_title);
+
+            builder.setPositiveButton(android.R.string.yes,
+                    new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            // get current phrase from current position on recyclerview usign chord list
+                            Chord cur_chord = song.getChords().get(currentFirstVisible);
+                            int cur_phrase = cur_chord.getFrase();
+                            removePhrase(cur_phrase);
 
 
-                    }
-                });
-        builder.setNegativeButton(android.R.string.no, null);
+                        }
+                    });
+            builder.setNegativeButton(android.R.string.no, null);
 
-        AlertDialog dialog = builder.create();
-        dialog.show();
+            AlertDialog dialog = builder.create();
+            dialog.show();
+        }
+        else{
+
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setMessage(R.string.dialog_unique_phrase);
+            builder.setPositiveButton(android.R.string.ok, null);
+
+            AlertDialog dialog = builder.create();
+            dialog.show();
+
+        }
 
     }
 
     private void removePhrase(int cur_phrase) {
-        //TODO que no es pugui borrar la frase si només queda una
         List<Chord> chords = song.getChords();
         List<String> phrases = song.getPhrases();
 
-        List<String> new_phrases = new ArrayList<>(phrases.size()-1);;
-        List<Chord> new_chords = new ArrayList<>(chords.size()-1);
+        List<String> new_phrases = new ArrayList<>(phrases.size()-1);
+        List<Chord> new_chords = new ArrayList<>();
 
         for (int i = 0; i < phrases.size(); i++){
             if ( i != cur_phrase) {
@@ -178,8 +190,11 @@ public class TabActivity extends AppCompatActivity {
         }
 
         for (int i = 0; i < chords.size(); i++){
-            if ( chords.get(i).getFrase() != cur_phrase ){
+            if ( chords.get(i).getFrase() < cur_phrase ){
                 new_chords.add(chords.get(i));
+            } else if ( chords.get(i).getFrase() > cur_phrase ){
+                Chord c = new Chord(chords.get(i).getName(), chords.get(i).getFrase()-1);
+                new_chords.add(c);
             }
         }
 
@@ -194,7 +209,6 @@ public class TabActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data){
         switch(requestCode){
             case EDIT_TAB:
-                //TODO permetre borrar la primera frase (ara no deixa)
                 if(resultCode == RESULT_OK){
                     String phrase = data.getStringExtra("text");
                     List<String> ch = data.getStringArrayListExtra("CH");

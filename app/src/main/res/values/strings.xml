@@ -3,4 +3,5 @@
     <string name="title_activity_list_song">ListSongActivity</string>
     <string name="dialog_remove_sentence">Do you want to remove the current phrase and its chords?</string>
     <string name="dialog_remove_title">Removing alert</string>
+    <string name="dialog_unique_phrase">You can not remove the only phrase in the song. Try to add another and remove this later.</string>
 </resources>
