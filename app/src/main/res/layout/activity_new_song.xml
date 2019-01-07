@@ -65,7 +65,7 @@
         android:inputType="text"
         android:text="Name"
         android:textSize="16sp"
-        app:layout_constraintBaseline_toBaselineOf="@id/title_text_view"
+        app:layout_constraintBaseline_toBaselineOf="@+id/title_text_view"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintLeft_toRightOf="@+id/v_guideline" />
 
@@ -108,7 +108,8 @@
         android:layout_marginEnd="32dp"
         android:layout_marginRight="32dp"
         android:layout_marginBottom="32dp"
-        android:text="Next"
+        android:onClick="onClickSave"
+        android:text="Save"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 

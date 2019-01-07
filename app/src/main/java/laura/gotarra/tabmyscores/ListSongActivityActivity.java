@@ -8,10 +8,14 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
+import android.widget.SearchView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class ListSongActivityActivity extends AppCompatActivity {
 
@@ -29,10 +33,13 @@ public class ListSongActivityActivity extends AppCompatActivity {
         songs = new ArrayList<>();
 
         songsView = findViewById(R.id.recyclerListSong);
+        songsView.setHasFixedSize(true);
 
-        songsView.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new Adapter();
-        songsView.setAdapter(adapter);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
+        songsView.setLayoutManager(layoutManager);
+
+        //editsearch = findViewById(R.id.searchView);
+        //editsearch.setOnQueryTextListener((SearchView.OnQueryTextListener) this);
 
         //model fictici de dades
 
@@ -76,7 +83,27 @@ public class ListSongActivityActivity extends AppCompatActivity {
         Song song2;
         song2 = new Song("Paz", "Saurom", frases2, chords2, tags2);
         songs.add(song2);
+
+        //songsView.setLayoutManager(new LinearLayoutManager(this));
+        adapter = new Adapter((ArrayList<Song>) songs);
+        songsView.setAdapter(adapter);
+
+        SearchView searchView = findViewById(R.id.searchView);
+        search(searchView);
     }
+
+    /*@Override
+    public boolean onQueryTextSubmit(String query) {
+
+        return false;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String newText) {
+        String text = newText;
+        adapter.filter(text);
+        return false;
+    }*/
 
     public void onClickItem(int position) {
         Song song = songs.get(position);
@@ -105,7 +132,16 @@ public class ListSongActivityActivity extends AppCompatActivity {
         }
     }
 
-    class Adapter extends RecyclerView.Adapter<ViewHolder> {
+    class Adapter extends RecyclerView.Adapter<ViewHolder> implements Filterable {
+
+        private ArrayList<Song> itemsList;
+        private ArrayList<Song> itemsListFull;
+
+        Adapter(ArrayList<Song> itemsList){
+            this.itemsList = itemsList;
+            itemsListFull = new ArrayList<>(itemsList);
+        }
+
         @NonNull
         @Override
         public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -129,6 +165,39 @@ public class ListSongActivityActivity extends AppCompatActivity {
         public int getItemCount(){
             return songs.size();
         }
+
+        @Override
+        public Filter getFilter() {
+            return exampleFilter;
+        }
+        private Filter exampleFilter = new Filter(){
+            @Override
+            protected FilterResults performFiltering(CharSequence charSequence){
+                ArrayList<Song> filtredList = new ArrayList<>();
+
+                if(charSequence == null || charSequence.length() == 0){
+                    filtredList.addAll(itemsListFull);
+                }
+                else{
+                    String filterPattern = charSequence.toString().toLowerCase().trim();
+
+                    for(Song item: itemsListFull){
+                        if(item.getName().toLowerCase().contains(filterPattern)){
+                            filtredList.add(item);
+                        }
+                    }
+                }
+                FilterResults results = new FilterResults();
+                results.values = filtredList;
+                return results;
+            }
+            @Override
+            protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
+                itemsList.clear();
+                itemsList.addAll((ArrayList) filterResults.values);
+                notifyDataSetChanged();
+            }
+        };
     }
 
     public void onClickAddSong(View view){
@@ -138,16 +207,44 @@ public class ListSongActivityActivity extends AppCompatActivity {
     //TODO completar l'intent. Un cop afegida la cançó s'ha de crear com a mínim una frase.
     //TODO se li pot afegir una frase de mostra amb un acord i la frase:
     // "This is an example phrase. You can add anothers and remove this later."
-/*
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         switch(requestCode){
             case ADD_SONG:
                 if( resultCode == RESULT_OK){
-                    Intent add_phrase = new Intent(this, EditTabActivity.class);
+                    Song song;
+                    ArrayList<String> frases = new ArrayList<>();
+                    frases.add("add one phrase and delete this one");
+                    ArrayList<Chord> chords = new ArrayList<>();
+                    chords.add(new Chord("Do",0));
+                    ArrayList<String> tags = new ArrayList<>();
+                    tags.add(data.getStringExtra("tags"));
+                    song = new Song(data.getStringExtra("title"),
+                            data.getStringExtra("artist"), frases, chords, tags);
+                    songs.add(song);
+                    adapter.notifyItemInserted(songs.size() - 1);
                 }
+                break;
+            default:
+                super.onActivityResult(requestCode, resultCode, data);
         }
 
-    }*/
+    }
+
+    private void search(SearchView searchView){
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                adapter.getFilter().filter(newText);
+                return false;
+            }
+        });
+    }
 }

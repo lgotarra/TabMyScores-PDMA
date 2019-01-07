@@ -30,12 +30,12 @@ public class NewSongActivity extends AppCompatActivity {
 
     }
 
-    public void onClickNext ( View view ) {
+    public void onClickSave ( View view ) {
         title = songTitle_editText.getText().toString();
         artist = songArtist_editText.getText().toString();
         tags = songTags_editText.getText().toString();
 
-        Intent new_song_data = new Intent(this, ListSongActivityActivity.class);
+        Intent new_song_data = new Intent();
         new_song_data.putExtra("title", title);
         new_song_data.putExtra("artist",artist);
         new_song_data.putExtra("tags",tags);
