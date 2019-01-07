@@ -7,76 +7,99 @@
     tools:context=".NewSongActivity">
 
     <TextView
-        android:id="@+id/song_newSong"
-        android:layout_width="wrap_content"
+        android:id="@+id/title_text_view"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginLeft="32dp"
         android:layout_marginTop="32dp"
-        android:text="Song"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:text="Title"
         android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@+id/v_guideline"
+        app:layout_constraintRight_toLeftOf="@+id/v_guideline"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/artist_newSong"
-        android:layout_width="wrap_content"
-        android:layout_height="23dp"
+        android:id="@+id/artist_text_view"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginLeft="32dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginRight="8dp"
         android:text="Artist"
         android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintRight_toLeftOf="@+id/v_guideline"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/song_newSong" />
+        app:layout_constraintTop_toBottomOf="@+id/title_text_view" />
 
     <TextView
-        android:id="@+id/tags_newSong"
-        android:layout_width="wrap_content"
+        android:id="@+id/tags_text_view"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginLeft="32dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginRight="8dp"
         android:text="Tags"
         android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintRight_toLeftOf="@+id/v_guideline"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/artist_newSong" />
+        app:layout_constraintTop_toBottomOf="@+id/artist_text_view" />
 
     <EditText
-        android:id="@+id/editSong_newSong"
-        android:layout_width="wrap_content"
+        android:id="@+id/title_edit_text"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginLeft="24dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginRight="20dp"
         android:ems="10"
-        android:inputType="textPersonName"
+        android:hint="Song title"
+        android:inputType="text"
         android:text="Name"
-        app:layout_constraintBaseline_toBaselineOf="@+id/song_newSong"
-        app:layout_constraintStart_toEndOf="@+id/artist_newSong" />
+        android:textSize="16sp"
+        app:layout_constraintBaseline_toBaselineOf="@id/title_text_view"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintLeft_toRightOf="@+id/v_guideline" />
 
     <EditText
-        android:id="@+id/editArtist_newSong"
-        android:layout_width="wrap_content"
+        android:id="@+id/artist_edit_text"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginLeft="24dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginRight="20dp"
         android:ems="10"
-        android:inputType="textPersonName"
+        android:hint="Song artist"
+        android:inputType="text"
         android:text="Name"
-        app:layout_constraintBaseline_toBaselineOf="@+id/artist_newSong"
-        app:layout_constraintStart_toEndOf="@+id/artist_newSong" />
+        android:textSize="16sp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/artist_text_view"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintLeft_toRightOf="@+id/v_guideline" />
 
     <EditText
-        android:id="@+id/editTags_newSong"
-        android:layout_width="wrap_content"
+        android:id="@+id/tags_edit_text"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginLeft="24dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginRight="20dp"
         android:ems="10"
-        android:inputType="textPersonName"
+        android:hint="Song tags"
+        android:inputType="text"
         android:text="Name"
-        app:layout_constraintBaseline_toBaselineOf="@+id/tags_newSong"
-        app:layout_constraintStart_toEndOf="@+id/artist_newSong" />
+        android:textSize="16sp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/tags_text_view"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintLeft_toRightOf="@+id/v_guideline" />
 
     <Button
         android:id="@+id/btn_next"
@@ -85,9 +108,15 @@
         android:layout_marginEnd="32dp"
         android:layout_marginRight="32dp"
         android:layout_marginBottom="32dp"
-        android:onClick="editTab"
-        android:text="next"
+        android:text="Next"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/v_guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.3" />
 
 </android.support.constraint.ConstraintLayout>

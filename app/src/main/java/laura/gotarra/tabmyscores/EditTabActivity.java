@@ -1,20 +1,15 @@
 package laura.gotarra.tabmyscores;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 public class EditTabActivity extends AppCompatActivity {
     private Diccionari diccionari;
@@ -24,7 +19,7 @@ public class EditTabActivity extends AppCompatActivity {
     private Object[] chords; // = {"Do", "Re", "Mi", "Fa", "Sol", "La", "Si"};
     private String frase, chord_actual;
     private ArrayList<String> chord;
-    private String tittle, artist, tags;
+    private int pos;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,12 +34,13 @@ public class EditTabActivity extends AppCompatActivity {
         chose_Chord.setAdapter(new ArrayAdapter<>(this,android.R.layout.simple_spinner_item, chords));
 
         tabView2 = findViewById(R.id.tabView2);
-        tabView2.setChords_frets(diccionari.getChords().get("Do"));
+        tabView2.setChords_frets(diccionari.getChords().get("Do")); // Default visible chord
 
         Intent intent = getIntent();
-        tittle = intent.getStringExtra("tittle");
-        artist = intent.getStringExtra("artist");
-        tags = intent.getStringExtra("tags");
+        if (intent != null){
+            pos = intent.getIntExtra("current_item_pos",0);
+        }
+
 
         chose_Chord.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -67,9 +63,7 @@ public class EditTabActivity extends AppCompatActivity {
         Intent data = new Intent();
         data.putExtra("text", frase);
         data.putExtra("CH", chord);
-        data.putExtra("tittle", tittle);
-        data.putExtra("artist", artist);
-        data.putExtra("tags", tags);
+        data.putExtra("current_item_pos", pos);
         setResult(RESULT_OK, data);
         finish();
     }

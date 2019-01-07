@@ -1,23 +1,22 @@
 package laura.gotarra.tabmyscores;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TextView;
 
-import java.util.AbstractQueue;
 import java.util.ArrayList;
 import java.util.List;
 
 public class ListSongActivityActivity extends AppCompatActivity {
 
-    private static List<Song> songs;
+    private static final int ADD_SONG = 1;
+    private List<Song> songs;
     private RecyclerView songsView;
     private Adapter adapter;
 
@@ -35,7 +34,7 @@ public class ListSongActivityActivity extends AppCompatActivity {
         adapter = new Adapter();
         songsView.setAdapter(adapter);
 
-
+        //model fictici de dades
 
         ArrayList<Chord> chords1 = new ArrayList<>();
         chords1.add(new Chord("Sol",0));
@@ -132,12 +131,23 @@ public class ListSongActivityActivity extends AppCompatActivity {
         }
     }
 
-    public void newSong(View view) {
-        Intent intent = new Intent(this, NewSongActivity.class);
-        startActivityForResult(intent, 3);
+    public void onClickAddSong(View view){
+        Intent intent_add_song = new Intent(this, NewSongActivity.class);
+        startActivityForResult(intent_add_song, ADD_SONG);
     }
+    //TODO completar l'intent. Un cop afegida la cançó s'ha de crear com a mínim una frase.
+    //TODO se li pot afegir una frase de mostra amb un acord i la frase:
+    // "This is an example phrase. You can add anothers and remove this later."
+/*
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch(requestCode){
+            case ADD_SONG:
+                if( resultCode == RESULT_OK){
+                    Intent add_phrase = new Intent(this, EditTabActivity.class);
+                }
+        }
 
-    public static void setSong(Song song){
-        songs.add(song);
-    }
+    }*/
 }

@@ -77,29 +77,46 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
+    <TextView
+        android:id="@+id/textSongView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:textSize="22sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tabRecycler"
+        tools:text="Con diez cañones por banda," />
+
     <Button
-        android:id="@+id/btn_edit"
+        android:id="@+id/btn_rmv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
         android:layout_marginBottom="16dp"
-        android:onClick="editTab"
-        android:text="edit"
+        android:onClick="onClickRemove"
+        android:text="REMOVE"
         app:layout_constraintBottom_toTopOf="@+id/userView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textSongView" />
 
-    <TextView
-        android:id="@+id/textSongView"
+    <Button
+        android:id="@+id/add_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="8dp"
-        android:textSize="22sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tabRecycler"
-        tools:text="Con diez cañones por banda," />
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginBottom="16dp"
+        android:onClick="onClickAddPhrase"
+        android:text="ADD"
+        app:layout_constraintBottom_toTopOf="@+id/userView"
+        app:layout_constraintEnd_toStartOf="@+id/btn_rmv"
+        app:layout_constraintTop_toBottomOf="@+id/textSongView" />
 </android.support.constraint.ConstraintLayout>
