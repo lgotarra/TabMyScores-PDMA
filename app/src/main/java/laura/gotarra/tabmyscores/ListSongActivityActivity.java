@@ -6,15 +6,23 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.SearchView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Scanner;
 
 public class ListSongActivityActivity extends AppCompatActivity {
 
@@ -23,6 +31,76 @@ public class ListSongActivityActivity extends AppCompatActivity {
     private RecyclerView songsView;
     private Adapter adapter;
 
+    private void saveSongList() {
+        try {
+            FileOutputStream outputStream = openFileOutput("Songs.txt", MODE_PRIVATE);
+            for (Song item : songs) { //for each song (name, artist, phrases (List), chords (List<string,int>), tags (List)
+                String line = item.getName() +";"+ item.getArtist()+";";
+                for (int i = 0; i < item.getPhrases().size(); i++){
+                    if ( i == item.getPhrases().size()-1){
+                        line += item.getPhrases().get(i) +";";
+                    } else {
+                        line += item.getPhrases().get(i) +"_";
+                    }
+                }
+
+                for (int i = 0; i < item.getChords().size(); i++){
+                    if ( i == item.getChords().size()-1){
+                        line += item.getChords().get(i).getName() +"-"+ item.getChords().get(i).getFrase() + ";";
+                    } else {
+                        line += item.getChords().get(i).getName() +"-"+ item.getChords().get(i).getFrase() + "_";
+                    }
+                }
+
+                for (int i = 0; i < item.getTags().size(); i++){
+                    if ( i == item.getTags().size()-1){
+                        line += item.getTags().get(i) + "\n" ;
+                    } else {
+                        line += item.getTags().get(i) +"_";
+                    }
+                }
+
+                outputStream.write(line.getBytes());
+            }
+        } catch (FileNotFoundException e) {
+            Toast.makeText(this, getResources().getString(R.string.error_open_file), Toast.LENGTH_SHORT).show();
+        } catch (IOException e) {
+            Toast.makeText(this, getResources().getString(R.string.error_writing), Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void readSongList() {
+        try {
+            FileInputStream inputStream = openFileInput("Songs.txt");
+            Scanner scanner = new Scanner(inputStream);
+            while (scanner.hasNextLine()) {
+                String line = scanner.nextLine();
+                String[] parts = line.split(";");
+                List<String> phrases = Arrays.asList(parts[2].split("_"));
+                String[] chords_list = parts[3].split("_");
+                List<Chord> chords = new ArrayList<>();
+
+                for (String item : chords_list){
+                    String[] chord = item.split("-");
+                    Chord c = new Chord(chord[0],Integer.parseInt(chord[1]));
+                    chords.add(c);
+                }
+
+                List<String> tags = Arrays.asList(parts[4].split("_"));
+
+                songs.add(new Song(parts[0], parts[1], phrases, chords, tags ));
+            }
+        } catch (FileNotFoundException e) {
+            Log.e(getResources().getString(R.string.app_name), getResources().getString(R.string.error_open_file));
+        }
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        saveSongList();
+    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +108,7 @@ public class ListSongActivityActivity extends AppCompatActivity {
         setContentView(R.layout.activity_list_song_activity);
 
         songs = new ArrayList<>();
+        readSongList();
 
         songsView = findViewById(R.id.recyclerListSong);
         songsView.setHasFixedSize(true);
@@ -40,7 +119,7 @@ public class ListSongActivityActivity extends AppCompatActivity {
         //editsearch = findViewById(R.id.searchView);
         //editsearch.setOnQueryTextListener((SearchView.OnQueryTextListener) this);
 
-        //model fictici de dades
+        /*model fictici de dades
 
         ArrayList<Chord> chords1 = new ArrayList<>();
         chords1.add(new Chord("Sol",0));
@@ -82,6 +161,7 @@ public class ListSongActivityActivity extends AppCompatActivity {
         Song song2;
         song2 = new Song("Paz", "Saurom", frases2, chords2, tags2);
         songs.add(song2);
+        */
 
         //songsView.setLayoutManager(new LinearLayoutManager(this));
         adapter = new Adapter((ArrayList<Song>) songs);
@@ -247,4 +327,5 @@ public class ListSongActivityActivity extends AppCompatActivity {
             }
         });
     }
+
 }
