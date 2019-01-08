@@ -21,4 +21,5 @@
     <string name="error_open_file">No s\'ha pogut obrir el fitxer</string>
     <string name="error_reading_file">No s\'ha pogut llegir el fitxer</string>
     <string name="error_writing">No s\'ha pogut escriure al fitxer</string>
+    <string name="remove_song">Estàs segur que vols esborrar</string>
 </resources>

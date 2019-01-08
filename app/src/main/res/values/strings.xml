@@ -22,4 +22,5 @@
     <string name="error_open_file">Unable to open file</string>
     <string name="error_reading_file">Unable to read file</string>
     <string name="error_writing">Unable to write</string>
+    <string name="remove_song">You really want to remove</string>
 </resources>

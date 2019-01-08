@@ -1,8 +1,10 @@
 package laura.gotarra.tabmyscores;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -208,6 +210,14 @@ public class ListSongActivityActivity extends AppCompatActivity {
                     onClickItem(getAdapterPosition());
                 }
             });
+
+            itemView.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View v) {
+                    onLongClickItem(getAdapterPosition());
+                    return true;
+                }
+            });
         }
     }
 
@@ -326,6 +336,24 @@ public class ListSongActivityActivity extends AppCompatActivity {
                 return false;
             }
         });
+    }
+
+    public void onLongClickItem(final int position) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage(getResources().getString(R.string.remove_song)+ " '" + songs.get(position).getName() + "'?");
+        builder.setPositiveButton(getResources().getString(R.string.remove), new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                removeItem(position);
+            }
+        });
+        builder.setNegativeButton(android.R.string.cancel, null);
+        builder.create().show();
+    }
+
+    private void removeItem(int position) {
+        songs.remove(position);
+        adapter.notifyItemRemoved(position);
     }
 
 }

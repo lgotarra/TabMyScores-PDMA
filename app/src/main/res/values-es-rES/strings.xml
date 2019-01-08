@@ -21,4 +21,5 @@
     <string name="error_open_file">No se ha podido abrir el archivo</string>
     <string name="error_reading_file">No se ha podido leer el archivo</string>
     <string name="error_writing">No se ha podido escribir en el archivo</string>
+    <string name="remove_song">¿Estás seguro de que quieres borrar</string>
 </resources>
