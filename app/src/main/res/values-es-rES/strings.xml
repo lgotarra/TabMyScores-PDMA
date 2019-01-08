@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">TabMyScores</string>
+    <string name="dialog_remove_sentence">¿Quieres borrar esta frase y sus acordes?</string>
+    <string name="dialog_remove_title">Alerta de borrado</string>
+    <string name="dialog_unique_phrase">No puedes borrar la única frase de la canción. Añade otra y borrala luego.</string>
+    <string name="example_phrase">Esta es una frase de ejemplo. Puedes añadir más y borrarla luego.</string>
+    <string name="chord">Acorde</string>
+    <string name="edit_phrase">Inserta una nueva frase</string>
+    <string name="save">Guardar</string>
+    <string name="add_chord">Añadir acorde</string>
+    <string name="user">Usuario</string>
+    <string name="name">Nombre</string>
+    <string name="title">Título</string>
+    <string name="artist">Artista</string>
+    <string name="add_title">Inserta el título de la canción</string>
+    <string name="add_artist">Inserta el artista de la canción</string>
+    <string name="add_tags">Añade algunos tags</string>
+    <string name="add">Añadir</string>
+    <string name="remove">Borrar</string>
+</resources>

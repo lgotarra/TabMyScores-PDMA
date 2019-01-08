@@ -15,7 +15,6 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 public class ListSongActivityActivity extends AppCompatActivity {
 
@@ -154,9 +153,10 @@ public class ListSongActivityActivity extends AppCompatActivity {
             Song song = songs.get(position);
             holder.listSongName.setText(song.getName());
             holder.listArtist.setText(song.getArtist());
+
             String tag = "";
             for (String s : song.getTags()) {
-                tag += s;
+                tag = tag + s + " ";
             }
             holder.listTags.setText(tag);
         }
@@ -216,7 +216,7 @@ public class ListSongActivityActivity extends AppCompatActivity {
                 if( resultCode == RESULT_OK){
                     Song song;
                     ArrayList<String> frases = new ArrayList<>();
-                    frases.add("add one phrase and delete this one");
+                    frases.add(getResources().getString(R.string.example_phrase));
                     ArrayList<Chord> chords = new ArrayList<>();
                     chords.add(new Chord("Do",0));
                     ArrayList<String> tags = new ArrayList<>();

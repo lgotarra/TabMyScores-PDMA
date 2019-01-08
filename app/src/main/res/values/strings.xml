@@ -1,7 +1,22 @@
 <resources>
-    <string name="app_name">TabMyScores</string>
-    <string name="title_activity_list_song">ListSongActivity</string>
+    <string name="app_name" translatable="false">TabMyScores</string>
+    <string name="title_activity_list_song" translatable="false">ListSongActivity</string>
     <string name="dialog_remove_sentence">Do you want to remove the current phrase and its chords?</string>
     <string name="dialog_remove_title">Removing alert</string>
     <string name="dialog_unique_phrase">You can not remove the only phrase in the song. Try to add another and remove this later.</string>
+    <string name="example_phrase">This is an example sentence. You can add more and delete it later.</string>
+    <string name="chord">Chord</string>
+    <string name="edit_phrase">Insert a new phrase</string>
+    <string name="save">Save</string>
+    <string name="add_chord">Add chord</string>
+    <string name="user">User</string>
+    <string name="name">Name</string>
+    <string name="title">Title</string>
+    <string name="artist">Artist</string>
+    <string name="tags" translatable="false">Tags</string>
+    <string name="add_title">Insert song\'s title</string>
+    <string name="add_artist">Insert song\'s artist</string>
+    <string name="add_tags">Add some tags</string>
+    <string name="add">Add</string>
+    <string name="remove">Remove</string>
 </resources>

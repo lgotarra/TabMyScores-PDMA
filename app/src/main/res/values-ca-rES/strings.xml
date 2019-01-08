@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">TabMyScores</string>
+    <string name="dialog_remove_sentence">Vols esborrar la frase actual i els seus acords?</string>
+    <string name="dialog_remove_title">Alerta d\'esborrat</string>
+    <string name="dialog_unique_phrase">No pots esborrar l\'única frase de la cançó. Afegeix-ne una altra i esborra aquesta més tard.</string>
+    <string name="example_phrase">Aquesta és una frase d\'exemple. Pots afegir-ne més i esborrar-la més tard.</string>
+    <string name="chord">Acord</string>
+    <string name="edit_phrase">Insereix una nova frase</string>
+    <string name="save">Guardar</string>
+    <string name="add_chord">Afegir acord</string>
+    <string name="user">Usuari</string>
+    <string name="name">Nom</string>
+    <string name="title">Títol</string>
+    <string name="artist">Artista</string>
+    <string name="add_title">Insereix el títol de la cançó</string>
+    <string name="add_artist">Insereix l\'artista de la cançó</string>
+    <string name="add_tags">Afegeix alguns tags</string>
+    <string name="add">Afegir</string>
+    <string name="remove">Esborrar</string>
+</resources>
