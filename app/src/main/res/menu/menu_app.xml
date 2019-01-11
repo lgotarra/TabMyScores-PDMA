@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    xmlns:tools="http://schemas.android.com/tools" tools:context=".MainActivity">
+    <item android:id="@+id/sing_in_menu" android:title="Sing In"
+        android:orderInCategory="100"/>
+    <item android:id="@+id/log_in_menu" android:title="Log In"
+        android:orderInCategory="100"/>
+    <item android:id="@+id/profile_menu" android:title="User Profile"
+        android:orderInCategory="100"/>
+</menu>

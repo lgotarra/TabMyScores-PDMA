@@ -8,6 +8,8 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -43,6 +45,35 @@ public class TabActivity extends AppCompatActivity {
         textSongView = findViewById(R.id.textSongView);
 
         printData(song);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu){
+        getMenuInflater().inflate(R.menu.menu_app, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item){
+        int id = item.getItemId();
+        Intent about;
+        switch(id){
+            case R.id.sing_in_menu:
+                // Log.i("ActionBar", "Settings!");
+                about = new Intent(getApplicationContext(), SingInActivity.class);
+                startActivity(about);
+                return true;
+            case R.id.log_in_menu:
+                about = new Intent(getApplication(), LogInActivity.class);
+                startActivity(about);
+                return true;
+            case R.id.profile_menu:
+                about = new Intent(getApplication(), UserProfileActivity.class);
+                startActivity(about);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     private void printData(Song song){

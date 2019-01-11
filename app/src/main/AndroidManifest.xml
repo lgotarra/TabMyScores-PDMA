@@ -19,7 +19,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".NewSongActivity"></activity>
+        <activity android:name=".NewSongActivity" />
+        <activity android:name=".LogInActivity" />
+        <activity android:name=".SingInActivity" />
+        <activity android:name=".UserProfileActivity" />
+        <activity android:name=".EditProfileActivity"></activity>
     </application>
 
 </manifest>
