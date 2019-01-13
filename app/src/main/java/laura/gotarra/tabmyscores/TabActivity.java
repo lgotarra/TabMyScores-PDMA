@@ -47,7 +47,7 @@ public class TabActivity extends AppCompatActivity {
         printData(song);
     }
 
-    @Override
+    /*@Override
     public boolean onCreateOptionsMenu(Menu menu){
         getMenuInflater().inflate(R.menu.menu_app, menu);
         return true;
@@ -74,7 +74,7 @@ public class TabActivity extends AppCompatActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
-    }
+    }*/
 
     private void printData(Song song){
         
@@ -240,8 +240,14 @@ public class TabActivity extends AppCompatActivity {
         switch(requestCode){
             case EDIT_TAB:
                 if(resultCode == RESULT_OK){
-                    String phrase = data.getStringExtra("text");
+                    String phrase = data.getStringExtra("phrase");
                     List<String> ch = data.getStringArrayListExtra("CH");
+                    /*int i = song.getChords().get(song.getChords().size()-1).getFrase() + 1;
+                    ArrayList<Chord> chords = new ArrayList<>();
+                    for(String chs: ch){
+                        Chord C = new Chord(ch, i);
+                        chords.add(C);
+                    }*/
                     // we save the las current_item_pos on the layout by passing it on intents
                     int cur_pos = data.getIntExtra("current_item_pos",0);
                     List<Chord> new_chords = new ArrayList<>();

@@ -1,5 +1,6 @@
 package laura.gotarra.tabmyscores;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Song {
@@ -13,9 +14,9 @@ public class Song {
     public Song(String name, String artist, List<String> phrases, List<Chord> chords, List<String> tags) {
         this.name = name;
         this.artist = artist;
-        this.phrases = phrases;
-        this.chords = chords;
-        this.tags = tags;
+        this.phrases = new ArrayList<>(phrases);
+        this.chords = new ArrayList<>(chords);
+        this.tags = new ArrayList<>(tags);
     }
 
     public String getName() {
@@ -63,7 +64,7 @@ public class Song {
     }
 
     public void addPhrase(String phrase){
-        this.phrases.add(phrase);
+        phrases.add(phrase);
     }
 
 

@@ -9,8 +9,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Filter;
@@ -123,49 +121,142 @@ public class ListSongActivityActivity extends AppCompatActivity {
         //editsearch = findViewById(R.id.searchView);
         //editsearch.setOnQueryTextListener((SearchView.OnQueryTextListener) this);
 
-        /*model fictici de dades
+        // model fictici de dades
 
-        ArrayList<Chord> chords1 = new ArrayList<>();
-        chords1.add(new Chord("Sol",0));
+        /*ArrayList<Chord> chords1 = new ArrayList<>();
+        chords1.add(new Chord("Lam",0));
         chords1.add(new Chord("Fa",0));
-        chords1.add(new Chord("Si",1));
+        chords1.add(new Chord("Do",1));
         chords1.add(new Chord("Sol",1));
         chords1.add(new Chord("Fa",1));
+        chords1.add(new Chord("Sol", 1));
+        chords1.add(new Chord("Lam",2));
+        chords1.add(new Chord("Fa",2));
+        chords1.add(new Chord("Do",3));
+        chords1.add(new Chord("Sol",3));
+        chords1.add(new Chord("Fa",3));
+        chords1.add(new Chord("Sol", 3));
+        chords1.add(new Chord("Fa",4));
+        chords1.add(new Chord("Sol",4));
+        chords1.add(new Chord("Lam", 4));
+        chords1.add(new Chord("Sol",4));
+        chords1.add(new Chord("Fa",4));
+        chords1.add(new Chord("Sol",5));
+        chords1.add(new Chord("Mim",5));
+        chords1.add(new Chord("Fa",5));
+        chords1.add(new Chord("Sol", 5));
 
         ArrayList<String> frases1 = new ArrayList<>();
-        frases1.add("Con diez cañones por banda,");
-        frases1.add("viento en popa a toda vela");
-
+        frases1.add("Cuentan que en Troya una vez");
+        frases1.add("una batalla empezó forjando así su leyenda");
+        frases1.add("Y que diez años pasó");
+        frases1.add("sitianda por la ambición de poseer la ciudad.");
+        frases1.add("Al no poderla invadir los griegos fueron marchando");
+        frases1.add("pero antes de irse de allí un gran regolo quedó");
 
         ArrayList<String> tags1 = new ArrayList<>();
         tags1.add("Metal");
         Song song1;
-        song1 = new Song("La Canción Del Pirata", "Tierra Santa", frases1, chords1, tags1);
+        song1 = new Song("Caballo de Troya", "Tierra Santa", frases1, chords1, tags1);
         songs.add(song1);
 
 
 
         ArrayList<Chord> chords2 = new ArrayList<>();
-        chords2.add(new Chord("Re",0));
-        chords2.add(new Chord("La",0));
+        chords2.add(new Chord("Lam",0));
         chords2.add(new Chord("Fa",0));
-        chords2.add(new Chord("Do",0));
-        chords2.add(new Chord("Re",1));
-        chords2.add(new Chord("La",1));
-        chords2.add(new Chord("Fa",1));
         chords2.add(new Chord("Do",1));
+        chords2.add(new Chord("Sol",1));
+        chords2.add(new Chord("Lam",2));
+        chords2.add(new Chord("Fa",2));
+        chords2.add(new Chord("Do",3));
+        chords2.add(new Chord("Sol",3));
+        chords2.add(new Chord("Lam",4));
+        chords2.add(new Chord("Fa",4));
+        chords2.add(new Chord("Do",5));
+        chords2.add(new Chord("Sol",5));
+        chords2.add(new Chord("Lam",6));
+        chords2.add(new Chord("Fa",6));
+        chords2.add(new Chord("Do",7));
+        chords2.add(new Chord("Sol",7));
 
         ArrayList<String> frases2 = new ArrayList<>();
-        frases2.add("Si te pusieras un momento a pensar,");
-        frases2.add("Como escribir tu propio himno de la paz");
+        frases2.add("Si tu compañera es la soledad");
+        frases2.add("si te hicieron daño si te sientes mal");
+        frases2.add("rome tus cadenas sube la moral");
+        frases2.add("todo en esta vida puede mejorar");
+        frases2.add("Esta noche hay fiesta me pondre un disfraz");
+        frases2.add("porque con las brujas salgo a danzar");
+        frases2.add("vampiros se acercan que hospitalidad");
+        frases2.add("traen la risa puesta y un lindo puñal");
 
 
         ArrayList<String> tags2 = new ArrayList<>();
         tags2.add("Metal");
         Song song2;
-        song2 = new Song("Paz", "Saurom", frases2, chords2, tags2);
+        song2 = new Song("Noche de halloween", "Saurom", frases2, chords2, tags2);
         songs.add(song2);
-        */
+
+        ArrayList<Chord> chords3 = new ArrayList<>();
+        chords3.add(new Chord("Sol",0));
+        chords3.add(new Chord("La",0));
+        chords3.add(new Chord("Sim",0));
+        chords3.add(new Chord("Sol",1));
+        chords3.add(new Chord("La",1));
+        chords3.add(new Chord("Sim",1));
+        chords3.add(new Chord("Sol",2));
+        chords3.add(new Chord("La",2));
+        chords3.add(new Chord("Sim",2));
+        chords3.add(new Chord("Sol",3));
+        chords3.add(new Chord("La",3));
+        chords3.add(new Chord("Sim",3));
+
+        ArrayList<String> frases3 = new ArrayList<>();
+        frases3.add("Ayer puse el sol en remojo");
+        frases3.add("quise volver a ser el perro verde,");
+        frases3.add("hoy tengo los ojitos rojos,");
+        frases3.add("estuve bailando con la mala suerte");
+
+        ArrayList<String> tags3 = new ArrayList<>();
+        tags3.add("Rock");
+        Song song3;
+        song3 = new Song("El perro verde", "Marea", frases3, chords3, tags3);
+        songs.add(song3);
+
+
+
+        ArrayList<Chord> chords4 = new ArrayList<>();
+        chords4.add(new Chord("Sol",0));
+        chords4.add(new Chord("Re",0));
+        chords4.add(new Chord("Mim",0));
+        chords4.add(new Chord("Do",1));
+        chords4.add(new Chord("Re",1));
+        chords4.add(new Chord("Sol",1));
+        chords4.add(new Chord("Re",2));
+        chords4.add(new Chord("Lam",2));
+        chords4.add(new Chord("Re",2));
+        chords4.add(new Chord("Sol",3));
+        chords4.add(new Chord("Re",3));
+        chords4.add(new Chord("Mim",3));
+        chords4.add(new Chord("Do",4));
+        chords4.add(new Chord("Re",4));
+        chords4.add(new Chord("Sol",4));
+        chords4.add(new Chord("Lam",5));
+        chords4.add(new Chord("Re",5));
+
+        ArrayList<String> frases4 = new ArrayList<>();
+        frases4.add("¿Dónde vas metida en ese vijo abrigo gris?");
+        frases4.add("Si nadie espera en casa, ¿para qué llegar");
+        frases4.add("sin rumbo, aburrida, cansada de trabajar?");
+        frases4.add("¿Dónde están los buenos amigos que nunca se ivan a ir?");
+        frases4.add("¿Los besos que por las noches te hacían volar?");
+        frases4.add("¿los labios que siempre decian si?");
+
+        ArrayList<String> tags4 = new ArrayList<>();
+        tags4.add("Rock");
+        Song song4;
+        song4 = new Song("Abril", "La Fuga", frases4, chords4, tags4);
+        songs.add(song4);*/
 
         //songsView.setLayoutManager(new LinearLayoutManager(this));
         adapter = new Adapter((ArrayList<Song>) songs);
@@ -175,7 +266,7 @@ public class ListSongActivityActivity extends AppCompatActivity {
         search(searchView);
     }
 
-    @Override
+    /*@Override
     public boolean onCreateOptionsMenu(Menu menu){
         getMenuInflater().inflate(R.menu.menu_app, menu);
         return true;
@@ -202,7 +293,7 @@ public class ListSongActivityActivity extends AppCompatActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
-    }
+    }*/
 
     /*@Override
     public boolean onQueryTextSubmit(String query) {

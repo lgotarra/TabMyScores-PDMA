@@ -32,7 +32,7 @@ public class NewSongActivity extends AppCompatActivity {
 
     }
 
-    @Override
+    /*@Override
     public boolean onCreateOptionsMenu(Menu menu){
         getMenuInflater().inflate(R.menu.menu_app, menu);
         return true;
@@ -59,7 +59,7 @@ public class NewSongActivity extends AppCompatActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
-    }
+    }*/
 
     public void onClickSave ( View view ) {
         title = songTitle_editText.getText().toString();

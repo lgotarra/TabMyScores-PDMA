@@ -14,7 +14,7 @@ public class SingInActivity extends AppCompatActivity {
         setContentView(R.layout.activity_sing_in);
     }
 
-    @Override
+    /*@Override
     public boolean onCreateOptionsMenu(Menu menu){
         getMenuInflater().inflate(R.menu.menu_app, menu);
         return true;
@@ -41,5 +41,5 @@ public class SingInActivity extends AppCompatActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
-    }
+    }*/
 }

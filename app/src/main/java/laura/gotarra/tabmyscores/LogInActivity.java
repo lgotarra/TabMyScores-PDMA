@@ -29,7 +29,7 @@ public class LogInActivity extends AppCompatActivity {
         editText_Pasword = findViewById(R.id.editText_Password);
     }
 
-    @Override
+    /*@Override
     public boolean onCreateOptionsMenu(Menu menu){
         getMenuInflater().inflate(R.menu.menu_app, menu);
         return true;
@@ -51,7 +51,7 @@ public class LogInActivity extends AppCompatActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
-    }
+    }*/
 
     public void logIn(){
         if(users.containsKey(editText_Nickname.getText().toString())){

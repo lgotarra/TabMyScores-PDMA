@@ -19,7 +19,7 @@ public class EditTabActivity extends AppCompatActivity {
     private EditText editText;
     private Spinner chose_Chord;
     private Object[] chords; // = {"Do", "Re", "Mi", "Fa", "Sol", "La", "Si"};
-    private String frase, chord_actual;
+    private String chord_actual;
     private ArrayList<String> chord;
     private int pos;
 
@@ -58,7 +58,7 @@ public class EditTabActivity extends AppCompatActivity {
         });
     }
 
-    @Override
+    /*@Override
     public boolean onCreateOptionsMenu(Menu menu){
         getMenuInflater().inflate(R.menu.menu_app, menu);
         return true;
@@ -85,15 +85,15 @@ public class EditTabActivity extends AppCompatActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
-    }
+    }*/
 
     public void addChord(View view){
         chord.add(chord_actual);
     }
     public void finish(View view){
-        frase = editText.getText().toString();
+        String phrase = editText.getText().toString();
         Intent data = new Intent();
-        data.putExtra("text", frase);
+        data.putExtra("phrase", phrase);
         data.putExtra("CH", chord);
         data.putExtra("current_item_pos", pos);
         setResult(RESULT_OK, data);
